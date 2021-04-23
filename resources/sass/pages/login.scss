@@ -1,0 +1,46 @@
+.login_form {
+    width: 30%;
+    justify-content: center;
+    .form-group.column {
+        justify-content: center;
+        label {
+            margin: 0 auto;
+        }
+    }
+    .form-input {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+.actions {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    height: 6%;
+}
+
+.btn.btn-primary.add {
+    background-color: rgb(0, 70, 130);
+    border: none;
+    width: 40px;
+    height: 40px;
+    right: 0px;
+    position: absolute;
+}
+.card-header {
+    background-color: rgb(0, 70, 130);
+    color: white;
+}
+
+.form-control {
+    border: none;
+    border-bottom: 2px solid #004682;
+    background-color: transparent;
+    border-radius: 0px;
+    color: #004682;
+}
+.form-control:focus {
+    outline: none;
+    outline-width: 0;
+}
