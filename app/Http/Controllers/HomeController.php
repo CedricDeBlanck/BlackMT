@@ -37,7 +37,7 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-        $player = DB::table('user')->where('name', $request->player)->orWhere('name', 'like', '%' . $request->player . '%')->paginate(20);
+        $player = DB::table('users')->where('name', $request->player)->orWhere('name', 'like', '%' . $request->player . '%')->paginate(20);
 
 
         return response()->json($player);
@@ -115,7 +115,7 @@ class HomeController extends Controller
         DB::insert('insert into strafblad (uuid, rapport) values (?, ?)', [$uuid, $rapport]);
 
 
-        return response()->json(["succes" => true], 200);
+        return response()->json(["success" => true], 200);
     }
 
     public function allAccounts()
