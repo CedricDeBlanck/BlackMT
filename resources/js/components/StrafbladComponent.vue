@@ -74,9 +74,6 @@
                                 {{ errors }}
                             </div>
                         </div>
-                        <div style="margin: 10px; width: 100%;">
-                            <vue-ctk-date-time-picker v-model="form.time"></vue-ctk-date-time-picker>
-                        </div>
                         <div class="bottom_model">
                             <button type="submit" class="bottom_button">Aanmaken</button>
                         </div>
@@ -90,9 +87,6 @@
 import axios from 'axios'
 export default {
     name: 'strafblad-component',
-    components: {
-        'VueCtkDateTimePicker': require('vue-ctk-date-time-picker').default,
-    },
     data() {
         return {
             player: null,
@@ -137,11 +131,10 @@ export default {
                 .post(route('add.rapport'), { rapport: this.form, player: this.player })
                 .then((response) => {
                     this.closeFormModal();
-                    console.log(response);
                     window.location.reload();
                 })
                 .catch(e => {
-                    this.errors = "De opgegeven text mag maximaal 255 tekens bevatten."
+                    this.errors = e;
                 })
         },
         openStrafModal(message = null) {

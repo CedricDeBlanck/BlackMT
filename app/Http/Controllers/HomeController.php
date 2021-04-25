@@ -48,7 +48,7 @@ class HomeController extends Controller
         if ($request->wantsJson()) {
 
             $uuid = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-            $player = DB::table('user')->where('uuid', $uuid)->first();
+            $player = DB::table('users')->where('uuid', $uuid)->first();
 
             return response()->json(compact('player'));
         } else {
