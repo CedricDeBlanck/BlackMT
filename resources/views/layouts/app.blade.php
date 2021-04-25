@@ -63,7 +63,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    @if (Auth::user()->name == 'admin')
+                                    @if (Auth::user()->role == 'Minister')
                                         <a class="dropdown-item" href="{{ route('account.aanmaken') }}">
                                             {{ __('Account aanmaken') }}
                                         </a>

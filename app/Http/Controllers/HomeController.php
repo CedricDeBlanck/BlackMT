@@ -121,7 +121,7 @@ class HomeController extends Controller
     public function allAccounts()
     {
 
-        $accounts = DB::table('users')->get();
+        $accounts = DB::table('web_accounts')->get();
 
         return response()->json($accounts);
     }
