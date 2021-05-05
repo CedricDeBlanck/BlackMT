@@ -1847,6 +1847,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+var _props$data$props$met;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
 //
 //
 //
@@ -1932,44 +1938,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_props$data$props$met = {
   props: [],
   data: function data() {
     return {
       userdata: [],
       player: null,
       form: {
+        user: null,
         active: false,
         name: null,
         email: null,
         role: null
-      }
+      },
+      errors: null
     };
-  },
-  methods: {
-    build: function build() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('account.accounts.all')).then(function (response) {
-        _this.userdata = response.data;
-      })["catch"](function () {});
-    },
-    openEditModal: function openEditModal() {
-      this.form.active = true;
-    },
-    closeEditModal: function closeEditModal() {
-      this.form.active = false;
-    },
-    deleteUser: function deleteUser() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post(route('accounts.delete'), {
-        user: this.user
-      });
-    }
-  },
-  mounted: function mounted() {
-    this.build();
   }
-});
+}, _defineProperty(_props$data$props$met, "props", ['allusers']), _defineProperty(_props$data$props$met, "methods", {
+  build: function build() {
+    this.userdata = JSON.parse(this.allusers);
+  },
+  openEditModal: function openEditModal(user) {
+    this.form.active = true;
+    this.form.user = user;
+  },
+  closeEditModal: function closeEditModal() {
+    this.form.active = false;
+  },
+  deleteUser: function deleteUser() {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route('accounts.delete'), {
+      user: this.user
+    });
+  }
+}), _defineProperty(_props$data$props$met, "mounted", function mounted() {
+  this.build();
+}), _props$data$props$met);
 
 /***/ }),
 
@@ -39978,19 +39981,16 @@ var render = function() {
                         "button",
                         {
                           staticClass: "action",
-                          on: { click: _vm.openEditModal }
+                          on: {
+                            click: function($event) {
+                              return _vm.openEditModal(user)
+                            }
+                          }
                         },
                         [_c("i", { staticClass: "icofont-pencil-alt-5" })]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "action delete",
-                          on: { click: _vm.deleteUser }
-                        },
-                        [_c("i", { staticClass: "icofont-trash" })]
-                      )
+                      _vm._m(0, true)
                     ])
                   ]
                 )
@@ -40033,11 +40033,8 @@ var render = function() {
                   "form",
                   {
                     staticStyle: { width: "100%", position: "relative" },
+                    attrs: { action: "/save-user" },
                     on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.save($event)
-                      },
                       keydown: function($event) {
                         _vm.errors == null
                       }
@@ -40070,10 +40067,10 @@ var render = function() {
                           staticStyle: { width: "95%" },
                           attrs: {
                             name: "name",
-                            required: "",
                             id: "name",
                             placeholder: "",
-                            type: "text"
+                            type: "text",
+                            defaultValue: "form.user.name"
                           },
                           domProps: { value: _vm.form.name },
                           on: {
@@ -40123,7 +40120,6 @@ var render = function() {
                           staticStyle: { width: "95%" },
                           attrs: {
                             name: "email",
-                            required: "",
                             id: "email",
                             placeholder: "example@blackmt.nl"
                           },
@@ -40157,7 +40153,7 @@ var render = function() {
                             ],
                             staticClass: "form-control",
                             staticStyle: { width: "95%" },
-                            attrs: { name: "role", id: "role", required: "" },
+                            attrs: { name: "role", id: "role" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -40213,7 +40209,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(0)
+                    _vm._m(1)
                   ]
                 )
               ])
@@ -40225,6 +40221,20 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", { attrs: { method: "POST", action: "/delete-user" } }, [
+      _c("input", { attrs: { type: "hidden", value: "user" } }),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "action delete", attrs: { type: "submit" } },
+        [_c("i", { staticClass: "icofont-trash" })]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -123,6 +123,15 @@ class HomeController extends Controller
 
         $accounts = DB::table('web_accounts')->get();
 
-        return response()->json($accounts);
+        return view('account.accounts')->with('accounts', $accounts);
+    }
+
+    public function editUserAccount($request)
+    {
+    }
+
+    public function deleteUser(Request $request)
+    {
+        dd($request);
     }
 }

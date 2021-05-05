@@ -7,12 +7,15 @@
                     <p class="player">{{ user.email }}</p>
                     <p class="player">{{ user.role }}</p>
                     <div class="actions">
-                        <button class="action" @click="openEditModal">
+                        <button class="action" @click="openEditModal(user)">
                             <i class="icofont-pencil-alt-5"></i>
                         </button>
-                        <button class="action delete" @click="deleteUser">
-                            <i class="icofont-trash"></i>
-                        </button>
+                        <form method="POST" action="/delete-user">
+                            <input type="hidden" value="user">
+                            <button class="action delete" type="submit">
+                                <i class="icofont-trash"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -25,7 +28,7 @@
                         <p>Wijzigen van gebruiker</p>
                         <p style="cursor: pointer;padding: 5px;font-size: 14px;"><i @click="closeEditModal" class="fas fa-times"></i></p>
                     </div>
-                    <form style="width: 100%; position: relative;" @submit.prevent="save" @keydown="errors == null">
+                    <form style="width: 100%; position: relative;" action="/save-user" @keydown="errors == null">
                         <div style="margin: 10px; width: 100%;" class="rapport">
                             <label>
                                 Naam
@@ -33,7 +36,6 @@
                             <input 
                                 style="width: 95%" 
                                 name="name" 
-                                required
                                 id="name"
                                 class="form-control"
                                 v-model="form.name"
@@ -41,6 +43,7 @@
                                 type="text"
                                 @keyup.enter="save()"
                                 @keydown="errors == null"
+                                defaultValue="form.user.name"
                             >
                             <label>
                                 E-mail
@@ -48,7 +51,6 @@
                             <input
                                 style="width: 95%"
                                 name="email"
-                                required
                                 id="email"
                                 class="form-control"
                                 v-model="form.email"
@@ -57,7 +59,7 @@
                             <label>
                                 Functie
                             </label>
-                            <select name="role" id="role" required class="form-control" v-model="form.role" style="width: 95%">
+                            <select name="role" id="role" class="form-control" v-model="form.role" style="width: 95%">
                                 <option>Aspirant</option>
                                 <option>Agent</option>
                                 <option>Hoofd Agent</option>
@@ -93,24 +95,25 @@ export default {
             userdata: [],
             player: null,
             form: {
+                user: null,
                 active: false,
                 name: null,
                 email: null,
                 role: null
-            }
+            },
+            errors: null
         }
     },
+    props: [
+        'allusers'
+    ],
     methods: {
         build() {
-            axios
-            .get(route('account.accounts.all'))
-            .then(response => {
-                this.userdata = response.data;
-            })
-            .catch(() => {})
+            this.userdata = JSON.parse(this.allusers);
         },
-        openEditModal() {
+        openEditModal(user) {
             this.form.active = true;
+            this.form.user = user;
         },
         closeEditModal() {
             this.form.active = false;
