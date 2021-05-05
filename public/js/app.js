@@ -2254,6 +2254,8 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(route('add.rapport'), {
         rapport: this.form,
         player: this.player
+      }, {
+        'X-Requested-With': 'XMLHttpRequest'
       }).then(function (response) {
         _this2.closeFormModal();
 

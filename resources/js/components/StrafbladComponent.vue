@@ -128,7 +128,7 @@ export default {
         },
         save() {
             axios
-                .post(route('add.rapport'), { rapport: this.form, player: this.player })
+                .post(route('add.rapport'), { rapport: this.form, player: this.player }, {'X-Requested-With': 'XMLHttpRequest'})
                 .then((response) => {
                     this.closeFormModal();
                     window.location.reload();
