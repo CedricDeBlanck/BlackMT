@@ -18,7 +18,7 @@
         </div>
         <div v-if="strafblad.length > 0">
             <div class="d-flex align-items-start mx-auto" style="flex-wrap: wrap; justify-content: space-between;" >
-                <div class="wrapped click" @click="openStrafModal(straf.rapport)" style="width: 45%; height: 50px; padding: 15px; background-color: #004682; border-radius: 5px; color: white;margin-top: 5px; margin-bottom: 5px;display: flex; flex-direction: row;box-shadow: 9px 9px 18px -13px rgba(0,0,0,0.75);justify-content: space-between;" v-for="straf in strafblad" v-bind:key="straf.id">
+                <div class="wrapped click" @click="openStrafModal(straf.rapport)" style="width: 45%; height: 50px; padding: 15px; background-color: #004682; border-radius: 5px; color: white;margin-top: 5px; margin-bottom: 5px;display: flex; flex-direction: row;box-shadow: 9px 9px 18px -13px rgba(0,0,0,0.75);justify-content: space-between;" v-for="straf in straffen" v-bind:key="straf.id">
                     <span class="truncate">{{ straf.rapport }}</span><a><i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
@@ -91,6 +91,7 @@ export default {
         return {
             player: null,
             skinUrl: 'https://crafatar.com/avatars/',
+            straffen: null,
             modal: {
                 message: "",
                 active: false
@@ -118,13 +119,14 @@ export default {
         // inJail
         build() {
             let url = window.location
-
             axios
                 .get(url)
                 .then((response) => {
                     this.player = response.data.player;
                 })
                 .catch(() => {});
+
+            this.straffen = JSON.parse(this.strafblad);
         },
         save() {
             axios

@@ -2218,6 +2218,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       player: null,
       skinUrl: 'https://crafatar.com/avatars/',
+      straffen: null,
       modal: {
         message: "",
         active: false
@@ -2247,6 +2248,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().get(url).then(function (response) {
         _this.player = response.data.player;
       })["catch"](function () {});
+      this.straffen = JSON.parse(this.strafblad);
     },
     save: function save() {
       var _this2 = this;
@@ -40489,7 +40491,7 @@ var render = function() {
                 "justify-content": "space-between"
               }
             },
-            _vm._l(_vm.strafblad, function(straf) {
+            _vm._l(_vm.straffen, function(straf) {
               return _c(
                 "div",
                 {
