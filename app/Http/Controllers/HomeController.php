@@ -123,9 +123,8 @@ class HomeController extends Controller
     public function allAccounts()
     {
 
-        $accounts = DB::table('web_accounts')->get();
-
-        return view('account.accounts')->with('accounts', $accounts);
+        $accounts = User::all(['id', 'name', 'role']);
+        return response()->json(compact('accounts'));
     }
 
     public function editUserAccount($request)
@@ -134,6 +133,9 @@ class HomeController extends Controller
 
     public function deleteUser(Request $request)
     {
-        dd($request);
+        // $user = User::where('id', $request->id);
+        // $user->delete();
+
+        // return response()->json(['success' => true], 200);
     }
 }

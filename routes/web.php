@@ -33,4 +33,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/account-aanmaken', [\App\Http\Controllers\HomeController::class, 'registerAccount'])->name('account.register');
     Route::post('/add-rapport', [\App\Http\Controllers\HomeController::class, 'addRapport'])->name('add.rapport');
     Route::get('/get-strafblad', [\App\Http\Controllers\HomeController::class, 'getStrafblad'])->name('get.strafblad');
+    Route::post('/accounts-delete', [\App\Http\Controllers\HomeController::class, 'deleteUser'])->name('accounts.delete');
 });

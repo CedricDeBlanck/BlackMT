@@ -10,12 +10,9 @@
                         <button class="action" @click="openEditModal(user)">
                             <i class="icofont-pencil-alt-5"></i>
                         </button>
-                        <form method="POST" action="/delete-user">
-                            <input type="hidden" value="user">
-                            <button class="action delete" type="submit">
-                                <i class="icofont-trash"></i>
-                            </button>
-                        </form>
+                        <button class="action delete" @click="deleteUser(user)">
+                            <i class="icofont-trash"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -101,6 +98,10 @@ export default {
                 email: null,
                 role: null
             },
+            deleteUserModal: {
+                active: false,
+
+            },
             errors: null
         }
     },
@@ -109,7 +110,10 @@ export default {
     ],
     methods: {
         build() {
-            this.userdata = JSON.parse(this.allusers);
+            axios.get(route('account.accounts.all'))
+                .then((response) => {
+                    this.userdata = response.data.accounts;
+                })
         },
         openEditModal(user) {
             this.form.active = true;
@@ -118,10 +122,14 @@ export default {
         closeEditModal() {
             this.form.active = false;
         },
-        deleteUser() {
+        closeDeleteModal() {
+            this.deleteUserModal.active = false;
+        },
+        deleteUser(user) {
+            // console.log(user);
             axios
                 .post(route('accounts.delete'), { user: this.user })
-        }
+        },
     },
     mounted() {
         this.build();
