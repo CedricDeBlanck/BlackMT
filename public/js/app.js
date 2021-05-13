@@ -2251,11 +2251,9 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post(route('add.rapport'), {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('https://meos-opmt.blackmt.nl/add-rapport', {
         rapport: this.form,
         player: this.player
-      }, {
-        'X-Requested-With': 'XMLHttpRequest'
       }).then(function (response) {
         _this2.closeFormModal();
 
