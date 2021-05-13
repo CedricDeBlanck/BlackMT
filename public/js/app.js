@@ -2251,7 +2251,7 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('https://meos-opmt.blackmt.nl/add-rapport', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('https://meos-ogmt.blackmt.nl/add-rapport', {
         rapport: this.form,
         player: this.player
       }).then(function (response) {

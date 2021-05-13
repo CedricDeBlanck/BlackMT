@@ -128,7 +128,7 @@ export default {
         },
         save() {
             axios
-                .post('https://meos-opmt.blackmt.nl/add-rapport', { rapport: this.form, player: this.player })
+                .post('https://meos-ogmt.blackmt.nl/add-rapport', { rapport: this.form, player: this.player })
                 .then((response) => {
                     this.closeFormModal();
                     window.location.reload();
